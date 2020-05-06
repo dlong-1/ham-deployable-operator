@@ -5,7 +5,7 @@ metadata:
   labels:
     app.kubernetes.io/instance: ham-deployable-operator
     app.kubernetes.io/managed-by: ham-deployable-operator
-    app.kubernetes.io/name: hybridApplication
+    app.kubernetes.io/name: hybridApplicationModel
 spec:
   replicas: 1
   selector:
@@ -17,7 +17,7 @@ spec:
         name: ham-deployable-operator
         app.kubernetes.io/instance: ham-deployable-operator
         app.kubernetes.io/managed-by: ham-deployable-operator
-        app.kubernetes.io/name: hybridapplication
+        app.kubernetes.io/name: hybridApplicationModel
       annotations:
         productID: 0123456789abcdef0123456789abcdef
         productName: some-name
@@ -28,57 +28,57 @@ spec:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
-            - matchExpressions:
-              - key: kubernetes.io/arch
-                operator: In
-                values: 
-                - amd64
-                - ppc64le
-                - s390x
+              - matchExpressions:
+                  - key: kubernetes.io/arch
+                    operator: In
+                    values:
+                      - amd64
+                      - ppc64le
+                      - s390x
       hostIPC: false
       hostNetwork: false
       hostPID: false
       containers:
-      - name: ham-deployable-operator
-        # Replace this with the built image name
-        image: REPLACE_IMAGE
-        securityContext:
-          allowPrivilegeEscalation: false
-          capabilities:
-            drop:
-            - ALL
-          privileged: false
-          readOnlyRootFilesystem: true
-          runAsNonRoot: true
-          runAsUser: 1001
-        command:
-        - ham-deployable-operator
-        imagePullPolicy: Always
-        env:
-        - name: WATCH_NAMESPACE
-          value: ""
-        - name: POD_NAME
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.name
-        - name: OPERATOR_NAME
-          value: "ham-deployable-operator"
-        livenessProbe:
-          exec:
-            command:
-            - ls
-          initialDelaySeconds: 15
-          periodSeconds: 15
-        readinessProbe:
-          exec:
-            command:
-            - ls
-          initialDelaySeconds: 15
-          periodSeconds: 15
-        resources:
-          limits:
-            cpu: 100m
-            memory: 512Mi
-          requests:
-            cpu: 25m
-            memory: 64Mi
+        - name: ham-deployable-operator
+          # Replace this with the built image name
+          image: quay.io/hybridappio/ham-deployable-operator@sha256:e6db11d5812e89310b91d4810619953cdaa66a5f209ecd862e8db4d6aa56c6e8
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            privileged: false
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1001
+          command:
+            - ham-deployable-operator
+          imagePullPolicy: Always
+          env:
+            - name: WATCH_NAMESPACE
+              value: ""
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: OPERATOR_NAME
+              value: "ham-deployable-operator"
+          livenessProbe:
+            exec:
+              command:
+                - ls
+            initialDelaySeconds: 15
+            periodSeconds: 15
+          readinessProbe:
+            exec:
+              command:
+                - ls
+            initialDelaySeconds: 15
+            periodSeconds: 15
+          resources:
+            limits:
+              cpu: 100m
+              memory: 512Mi
+            requests:
+              cpu: 25m
+              memory: 64Mi

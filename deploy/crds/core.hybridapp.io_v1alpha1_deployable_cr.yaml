@@ -1,7 +1,18 @@
 apiVersion: core.hybridapp.io/v1alpha1
 kind: Deployable
 metadata:
-  name: example-deployable
+  name: simple
+  labels:
+    app.kubernetes.io/instance: ham-deployable-operator
+    app.kubernetes.io/managed-by: ham-deployable-operator
+    app.kubernetes.io/name: hybridApplicationModel
 spec:
-  # Add fields here
-  size: 3
+  templates:
+  - deployerType: cloudform
+    template:
+      apiVersion: multicloud-apps.io/v1alpha1
+      kind: Subscription
+      metadata:
+        name: cloudform-sub
+        spec:
+          channel: ch-cfrepo/channel

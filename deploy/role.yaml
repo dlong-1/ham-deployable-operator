@@ -5,26 +5,26 @@ metadata:
   labels:
     app.kubernetes.io/instance: ham-deployable-operator
     app.kubernetes.io/managed-by: ham-deployable-operator
-    app.kubernetes.io/name: hybridApplication
+    app.kubernetes.io/name: hybridApplicationModel
   name: ham-deployable-operator
 rules:
-- apiGroups:
-  - '*'
-  resources:
-  - '*'
-  verbs:
-  - '*'
-- apiGroups:
-  - core.hybridapp.io
-  resources:
-  - '*'
-  - deployers
-  - deployersets
-  verbs:
-  - create
-  - delete
-  - get
-  - list
-  - patch
-  - update
-  - watch
+  - apiGroups:
+      - "*"
+    resources:
+      - "*"
+    verbs:
+      - "*"
+  - apiGroups:
+      - core.hybridapp.io
+    resources:
+      - "*"
+      - deployers
+      - deployersets
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch

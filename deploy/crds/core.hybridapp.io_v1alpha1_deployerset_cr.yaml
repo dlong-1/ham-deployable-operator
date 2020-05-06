@@ -2,6 +2,12 @@ apiVersion: core.hybridapp.io/v1alpha1
 kind: DeployerSet
 metadata:
   name: example-deployerset
+  labels:
+    app.kubernetes.io/instance: ham-deployable-operator
+    app.kubernetes.io/managed-by: ham-deployable-operator
+    app.kubernetes.io/name: hybridApplicationModel
 spec:
-  # Add fields here
-  size: 3
+  deployers:
+  - key: cloudform/builtin
+    spec:
+      type: cloudform
