@@ -1,5 +1,12 @@
 FROM registry.access.redhat.com/ubi8/ubi-minimal:8.1-398
 
+LABEL   name="quay.io/hybridappio/ham-deployable-operator" \
+        vendor="IBM" \
+        summary="Hybrid Application Model - Deployable Operator" \
+        description="Handles deployable components running on non-kubernetes platform(s)." \
+        architecture="$IMAGE_ARCH" \
+        maintainer="$IMAGE_OWNER"
+
 ENV OPERATOR=/usr/local/bin/ham-deployable-operator \
     USER_UID=1001 \
     USER_NAME=ham-deployable-operator

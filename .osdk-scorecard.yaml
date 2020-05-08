@@ -1,0 +1,15 @@
+scorecard:
+  # Setting a global scorecard option
+  output: json
+  plugins:
+    # `basic` tests configured to test the CRs
+    - basic:
+        cr-manifest:
+          - "deploy/crds/core.hybridapp.io_deployersets_crd.yaml"
+          - "deploy/crds/core.hybridapp.io_deployables_crd.yaml"
+    # `olm` tests configured to test the CRs
+    - olm:
+        cr-manifest:
+          - "deploy/crds/core.hybridapp.io_deployersets_crd.yaml"
+          - "deploy/crds/core.hybridapp.io_deployables_crd.yaml"
+        csv-path: "deploy/olm-catalog/ham-resource-discoverer/manifests/ham-resource-discoverer.clusterserviceversion.yaml"
