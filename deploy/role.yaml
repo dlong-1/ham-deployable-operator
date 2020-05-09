@@ -9,73 +9,24 @@ metadata:
   name: ham-deployable-operator
 rules:
   - apiGroups:
-    - ""
-    resources:
-    - pods
-    - services
-    - services/finalizers
-    - endpoints
-    - persistentvolumeclaims
-    - events
-    - configmaps
-    - secrets
-    verbs:
-    - create
-    - delete
-    - get
-    - list
-    - patch
-    - update
-    - watch
-  - apiGroups:
-    - apps
-    resources:
-    - deployments
-    - daemonsets
-    - replicasets
-    - statefulsets
-    verbs:
-    - create
-    - delete
-    - get
-    - list
-    - patch
-    - update
-    - watch
-  - apiGroups:
-    - monitoring.coreos.com
-    resources:
-    - servicemonitors
-    verbs:
-    - get
-    - create
-  - apiGroups:
-    - apps
+      - security.openshift.io
     resourceNames:
-    - deployer-operator
+      - ibm-restricted-scc
     resources:
-    - deployments/finalizers
+      - securitycontextconstraints
     verbs:
-    - update
+      - use
   - apiGroups:
-    - ""
+      - ""
     resources:
-    - pods
-    verbs:
-    - get
-  - apiGroups:
-    - apps
-    resources:
-    - replicasets
-    - deployments
-    verbs:
-    - get
-  - apiGroups:
-      - core.hybridapp.io
-    resources:
-      - "*"
-      - deployers
-      - deployersets
+      - pods
+      - services
+      - services/finalizers
+      - endpoints
+      - persistentvolumeclaims
+      - events
+      - configmaps
+      - secrets
     verbs:
       - create
       - delete
@@ -83,4 +34,67 @@ rules:
       - list
       - patch
       - update
+      - watch
+  - apiGroups:
+      - apps
+    resources:
+      - deployments
+      - daemonsets
+      - replicasets
+      - statefulsets
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - monitoring.coreos.com
+    resources:
+      - servicemonitors
+    verbs:
+      - get
+      - create
+  - apiGroups:
+      - apps
+    resourceNames:
+      - ham-deployable-operator
+    resources:
+      - deployments/finalizers
+    verbs:
+      - update
+  - apiGroups:
+      - ""
+    resources:
+      - pods
+    verbs:
+      - get
+  - apiGroups:
+      - apps
+    resources:
+      - replicasets
+      - deployments
+    verbs:
+      - get
+  - apiGroups:
+      - core.hybridapp.io
+    resources:
+      - "*"
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - "*"
+    resources:
+      - "*"
+    verbs:
+      - get
+      - list
       - watch
