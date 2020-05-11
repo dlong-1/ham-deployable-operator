@@ -19,7 +19,7 @@ spec:
         app.kubernetes.io/managed-by: ham-deployable-operator
         app.kubernetes.io/name: hybridApplicationModel
       annotations:
-#        productID: 0123456789abcdef0123456789abcdef
+        productID: 0123456789abcdef0123456789abcdef
         productName: Hybrid Application Model
         productVersion: "0.1.0"
         productMetric: FREE
@@ -42,7 +42,7 @@ spec:
       containers:
         - name: ham-deployable-operator
           # Replace this with the built image name
-          image: quay.io/hybridappio/ham-deployable-operator:latest
+          image: quay.io/hybridappio/ham-deployable-operator@sha256:9c1943033de0dea9e36f1189a42f629f856b5c523e10b506b3b72e90251250ca
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
@@ -64,6 +64,18 @@ spec:
                   fieldPath: metadata.name
             - name: OPERATOR_NAME
               value: "ham-deployable-operator"
+          livenessProbe:
+            exec:
+              command:
+                - ls
+            initialDelaySeconds: 15
+            periodSeconds: 15
+          readinessProbe:
+            exec:
+              command:
+                - ls
+            initialDelaySeconds: 15
+            periodSeconds: 15
           resources:
             limits:
               cpu: 100m
